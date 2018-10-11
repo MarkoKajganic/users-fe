@@ -1,0 +1,16 @@
+<div align="center">
+
+  <h1>Hello {{ActiveUser.email}} </h1>
+  <button class="btn btn-primary btn-sm" routerLink="/add-user"> Add user </button>
+  <button class="btn btn-danger btn-sm" (click)="authService.logout()"> Logout </button>
+  <h3>displaying all Users</h3>
+
+  <div *ngIf="users">
+    <div class="user" *ngFor="let user of users">
+      <a routerLink='/users/{{user.id}}'>{{user.email}}</a>
+      <a routerLink='/users/edit/{{user.id}}'><button class="btn btn-primary btn-sm"> Edit</button></a>
+      <button (click)="deleteUser(user)" class="btn btn-danger btn-sm">Delete</button>
+    </div>
+  </div>
+
+</div>

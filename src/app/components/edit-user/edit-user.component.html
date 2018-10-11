@@ -1,0 +1,40 @@
+<form #addUserForm="ngForm" (ngSubmit)="submit(user)">
+
+    <!-- EMAIL -->
+    <div class="form-group">
+        <label for="email">New Email address</label>
+        <input #email="ngModel" [(ngModel)]="user.email" type="email" class="form-control" name="email" required email>
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+
+            <div *ngIf="email.errors.email">
+                Please provide valid email address.
+            </div>
+        </div>
+    </div>
+
+    <!-- PASS -->
+    <div class="form-group">
+        <label for="password">New Password</label>
+        <input #password="ngModel" [(ngModel)]="user.password" required minlength="6" pattern="\w*[0-9]{1,}\w*"
+            [class.alert-danger]="password.invalid && password.dirty" type="password" class="form-control" name="password">
+
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+                Password is required
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Password must be at least 6 chars
+            </div>
+            <div *ngIf="password.errors.pattern">
+                Password must contain at least one number
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-block">Edit user</button>
+    
+</form>
